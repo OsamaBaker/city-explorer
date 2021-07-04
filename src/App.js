@@ -36,15 +36,17 @@ class App extends React.Component{
   render(){
     return(
       <>
-      <h1>
+      <h1 className='heading'>
         City Explorer
       </h1>
-      <h3>
+      <br />
+      <h3 className='h3'>
         Enter a city name:
       </h3>
-      <form onSubmit={this.getLocation}>
+      <form onSubmit={this.getLocation} className='form'>
         <input type='text' placeholder="Enter a city name" name='city'/>
-        <input type='submit' value='Explore!' />
+        <br />
+        <input type='submit' value='Explore!' className='submit'/>
       </form>
       <p>City Name: {this.state.cityData.display_name}, {this.state.cityData.lat}, {this.state.cityData.lon}</p>
       {this.state.showMap && 

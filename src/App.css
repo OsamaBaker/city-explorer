@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+.heading{
+  background-color: crimson;
+  color: white;
+  padding-left: 20px;
+  height: 50px;
+}
+
+.form{
+  padding: 30px;
+}
+
+.submit{
+  background-color: crimson;
+  color: white;
+  width: 185px;
+}
+
+.h3{
+  padding-left: 20px;
+}
