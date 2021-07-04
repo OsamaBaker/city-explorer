@@ -9,7 +9,8 @@ class App extends React.Component{
     super(props);
     this.state = {
       cityData: {},
-      searchQuery: ''
+      searchQuery: '',
+      showMap: false
     }
   }
 
@@ -26,9 +27,9 @@ class App extends React.Component{
     let resData = await axios.get(url)
 
     this.setState({
-      cityData: resData.data[0]
+      cityData: resData.data[0],
+      showMap: true
     })
-    console.log(this.state.cityData)
   }
 
 
@@ -45,7 +46,9 @@ class App extends React.Component{
         <input type='text' placeholder="Enter a city name" name='city'/>
         <input type='submit' value='Explore!' />
       </form>
-      <p>City Name: {this.state.cityData.display_name}</p>
+      <p>City Name: {this.state.cityData.display_name}, {this.state.cityData.lat}, {this.state.cityData.lon}</p>
+      {this.state.showMap && 
+      <img alt='' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_City_Explorer}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} />}
       </>
     )
   }
