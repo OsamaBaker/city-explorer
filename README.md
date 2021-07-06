@@ -19,3 +19,13 @@ Javascript was used to create this application along with react bootstrap and ax
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+Name of feature: Deploying the webpage
+
+Estimate of time needed to complete: 3 hours
+
+Start time: 3:00
+
+Finish time: 9:30 PM
+
+Actual time needed to complete: 6.5 hours
