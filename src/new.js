@@ -2,9 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 import axios from 'axios';
-import Weather from './components/Weather';
 import Movies from './components/Movies';
-
 
 class App extends React.Component{
 
@@ -15,7 +13,6 @@ class App extends React.Component{
       searchQuery: '',
       showMap: false,
       movieObj: [],
-      weatherInfo: []
     }
   }
 
@@ -27,40 +24,29 @@ class App extends React.Component{
       searchQuery: e.target.city.value
     })
 
-    let url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_City_Explorer}&q=${this.state.searchQuery}&format=json`;
+    let url = `http://localhost:3001/weather?searchQuery=${this.state.searchQuery}`;
 
     let resData = await axios.get(url)
 
-
+    
+    
     this.setState({
       cityData: resData.data[0],
       showMap: true
     })
+    console.log(this.state.cityData)
+  }
 
-
-
-    let weatherUrl = `${process.env.REACT_APP_WEATHER_URL}/weather?searchQuery=${this.state.searchQuery}`
-
-    let weatherInfo = await axios.get(weatherUrl)
-
-    this.setState({
-      weatherInfo: weatherInfo.data
-    })
-
-
-
-    let moviesUrl = `${process.env.REACT_APP_WEATHER_URL}/movies?searchQuery=${this.state.searchQuery}`
+  getMovies = async () => {
+    
+    let moviesUrl = `http://localhost:3001/movie?query=${this.state.searchQuery}`
 
     let moviesResData = await axios.get(moviesUrl)
 
     this.setState({
-      movieObj: moviesResData.data
+      movieObj: moviesResData.data[0]
     })
-    console.log(this.state.movieObj)
   }
-  
-  
-
 
 
   render(){
@@ -81,15 +67,7 @@ class App extends React.Component{
       <p>City Name: {this.state.cityData.display_name}, {this.state.cityData.lat}, {this.state.cityData.lon}</p>
       {this.state.showMap && 
       <img alt='' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_City_Explorer}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} />}
-
-      {this.state.weatherInfo.map((item, idx) => {
-        return <Weather description={item.description} date={item.date} />
-      })}
-
-      {this.state.movieObj.map((item, idx) => {
-        return <Movies title={item.title} image_url={item.image_url} average_votes={item.average_votes}/>
-      })}
-
+      <Movies movie={this.state.movieObj}/>
       </>
     )
   }
