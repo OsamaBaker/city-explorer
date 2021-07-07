@@ -1,18 +1,21 @@
-import React from 'react'
+import React from "react";
+import Movie from "./Movie";
+import Card from 'react-bootstrap/Card'
 
 class Movies extends React.Component {
-    render() {
-        return (
-            <div>
-                <p>
-                    Movie Name:
-                {this.props.title}
-                </p>
-
-                <img src={this.props.image_url} alt=''></img>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <Card>
+          <Movie
+            title={this.props.title}
+            image_url={this.props.image_url}
+            average_votes={this.props.average_votes}
+          />
+        </Card>
+      </div>
+    );
+  }
 }
 
-export default Movies
+export default Movies;
