@@ -14,7 +14,7 @@ class App extends React.Component {
       searchQuery: "",
       showMap: false,
       movieObj: [],
-      weatherInfo: [],
+      weatherData: []
     };
   }
 
@@ -39,7 +39,7 @@ class App extends React.Component {
     let weatherInfo = await axios.get(weatherUrl);
 
     this.setState({
-      weatherInfo: weatherInfo.data,
+      weatherData: weatherInfo.data,
     });
 
     let moviesUrl = `${process.env.REACT_APP_WEATHER_URL}/movies?searchQuery=${this.state.searchQuery}`;
@@ -74,7 +74,7 @@ class App extends React.Component {
           />
         )}
         <CardDeck>
-          {this.state.weatherInfo.map((item, idx) => {
+          {this.state.weatherData.map((item, idx) => {
             return (
               <Weather
                 description={item.description}
